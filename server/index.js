@@ -4,6 +4,7 @@ const cors = require('cors');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const { stops, routes, vehicles } = require('./data');
+const path = require('path');
 
 const PORT = Number(process.env.PORT) || 4000;
 const TRANSFER_MINUTES = 4;
@@ -13,7 +14,8 @@ const io = new Server(httpServer, { cors: { origin: true, methods: ['GET', 'POST
 const tickets = new Map();
 
 app.use(cors());
-app.use(express.json({ limit: '20kb' }));
+app.use(express.json({ limit: '20mb' }));
+app.use(express.static(path.join(__dirname, '..dist')))
 
 const getStop = (id) => stops.find((item) => item.id === id);
 const getRoute = (id) => routes.find((item) => item.id === id);
