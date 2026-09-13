@@ -15,7 +15,9 @@ const tickets = new Map();
 
 app.use(cors());
 app.use(express.json({ limit: '20mb' }));
-app.use(express.static(path.join(__dirname, '..dist')))
+app.use(express.static(path.join(__dirname, '..dist')));
+app.get('/', (req,res) => { res.sendFile(path.join(__dirname,'../dist/index.html'));
+});
 
 const getStop = (id) => stops.find((item) => item.id === id);
 const getRoute = (id) => routes.find((item) => item.id === id);
