@@ -30,7 +30,7 @@ function savedTicket() {
   return null;
 }
 async function api(path, options) {
-  const response = await fetch(`https://transportation-q9mk.onrender.com/api/${path}`, options);
+  const response = await fetch(`https://transportation-q9mk.onrender.com/api${path}`, options);
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || 'The transit service could not complete that request.');
   return data;
