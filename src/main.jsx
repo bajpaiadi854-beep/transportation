@@ -30,7 +30,7 @@ function savedTicket() {
   return null;
 }
 async function api(path, options) {
-  const response = await fetch(`/api${path}`, options);
+  const response = await fetch(`https://transportation-q9mk.onrender.com/api/${path}`, options);
   const data = await response.json();
   if (!response.ok) throw new Error(data.message || 'The transit service could not complete that request.');
   return data;
@@ -151,7 +151,7 @@ function App() {
   useEffect(() => {
     let active = true;
     refresh().then(() => active && setNetworkOnline(true)).catch((error) => active && setLoadNotice(error.message));
-    const socket = io({ reconnectionAttempts: 3 });
+    const socket = io('https://transportation-q9mk.onrender.com',{ reconnectionAttempts: 3 });
     socket.on('connect', () => active && setNetworkOnline(true));
     socket.on('disconnect', () => active && setNetworkOnline(false));
     socket.on('vehicle:snapshot', (data) => active && setVehicles(data));
